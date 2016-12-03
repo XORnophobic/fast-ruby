@@ -967,7 +967,7 @@ Comparison:
 
 > That test, however, runs into problems when the test string and regular <br>
 > expressions are changed. Here is an additional benchmark with a rewritten <br>
-> test that behaves in a more predictable fashion. [code](code/string/match_operator_vs_method_and_===.rb) <br>
+> test that behaves in a more predictable fashion. [code](code/string/match_operator_vs_method_and_%3D%3D%3D.rb) <br>
 > See code for logic in new test.
 
 ```
