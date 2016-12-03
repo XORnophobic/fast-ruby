@@ -942,30 +942,30 @@ Comparison:
 
 ##### `Regexp#===` vs `String#match` vs `String#=~` [code ](code/string/===-vs-=~-vs-match.rb)
 
-> :warning: <br>
-> Sometimes you can't replace `match` with `=~`, <br>
-> This is only useful for cases where you are checking <br>
-> for a match and not using the resultant match object. <br>
-> :warning: <br>
+> `String#=~` is noticably faster than `String#match`. While this does not automatically return
+> a MatchData object, you can still access it via the special variable `$~`.
 > `Regexp#===` is also faster than `String#match` but you need to switch the order of arguments.
 
 ```
 $ ruby -v code/string/===-vs-=~-vs-match.rb.rb
-ruby 2.2.2p95 (2015-04-13 revision 50295) [x86_64-darwin14]
+ruby 2.3.1p112 (2016-04-26 revision 54768) [x64-mingw32]
 
+Warming up --------------------------------------
+           String#=~   221.224k i/100ms
+     String#=~ w/ $~   218.588k i/100ms
+          Regexp#===   213.191k i/100ms
+        String#match   194.297k i/100ms
 Calculating -------------------------------------
-           String#=~    98.184k i/100ms
-          Regexp#===    92.382k i/100ms
-        String#match    83.601k i/100ms
--------------------------------------------------
-           String#=~      2.442M (± 7.6%) i/s -     12.175M
-          Regexp#===      2.259M (± 7.9%) i/s -     11.271M
-        String#match      1.840M (± 7.3%) i/s -      9.196M
+           String#=~      4.529M (± 0.5%) i/s -     22.786M in   5.031504s
+     String#=~ w/ $~      4.440M (± 0.3%) i/s -     22.296M in   5.022139s
+          Regexp#===      4.300M (± 0.4%) i/s -     21.532M in   5.007041s
+        String#match      3.590M (± 0.5%) i/s -     18.070M in   5.033744s
 
 Comparison:
-           String#=~:  2442335.1 i/s
-          Regexp#===:  2259277.3 i/s - 1.08x slower
-        String#match:  1839815.4 i/s - 1.33x slower
+           String#=~:  4528791.1 i/s
+     String#=~ w/ $~:  4439591.2 i/s - 1.02x  slower
+          Regexp#===:  4300482.4 i/s - 1.05x  slower
+        String#match:  3589807.1 i/s - 1.26x  slower
 ```
 
 See [#59](https://github.com/JuanitoFatas/fast-ruby/pull/59) and [#62](https://github.com/JuanitoFatas/fast-ruby/pull/62) for discussions.
