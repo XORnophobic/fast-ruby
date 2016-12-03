@@ -942,9 +942,11 @@ Comparison:
 
 ##### `Regexp#===` vs `String#match` vs `String#=~` [code ](code/string/===-vs-=~-vs-match.rb)
 
-> `String#=~` is noticably faster than `String#match`. While this does not automatically return <br>
-> a MatchData object, you can still access it via the special variable `$~`. <br>
-> `Regexp#===` is also faster than `String#match` but you need to switch the order of arguments.
+> `String#=~` or `Regexp#=~` are both noticably faster than `String#match`. While this does <br>
+>  not automatically return a MatchData object, you can still access it via special variable `$~`. <br>
+> `Regexp#===` is also faster than `String#match` but you need to switch the order of arguments. <br>
+> `===` and `=~` with `$~` are same-ish with more complex examples, so it isn't really worth <br>
+> altering existing code unless you need access to match data.
 
 ```
 $ ruby -v code/string/===-vs-=~-vs-match.rb.rb
