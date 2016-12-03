@@ -974,6 +974,16 @@ Comparison:
 $ ruby -v code/string/match_operator_vs_method_and_===.rb
 ruby 2.3.1p112 (2016-04-26 revision 54768) [x64-mingw32]
 
+Calculating -------------------------------------
+        Match Method      2.512k (± 0.6%) i/s -     12.750k in   5.075839s
+      Nothing Method      5.238k (± 0.3%) i/s -     26.418k in   5.043598s
+      Match Operator      8.328k (± 0.5%) i/s -     42.177k in   5.064590s
+    Nothing Operator      6.909k (± 0.4%) i/s -     34.600k in   5.007800s
+     Match Plus Data      2.804k (± 0.6%) i/s -     14.100k in   5.028538s
+   Nothing Plus Data      6.779k (± 0.3%) i/s -     34.068k in   5.025774s
+    Match Threequals      8.585k (± 0.3%) i/s -     43.350k in   5.049509s
+  Nothing Threequals      7.056k (± 0.4%) i/s -     35.955k in   5.095588s
+
 Comparison:
     Match Threequals:     8585.0 i/s
       Match Operator:     8328.0 i/s - 1.03x  slower
