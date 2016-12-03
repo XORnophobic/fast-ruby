@@ -4,6 +4,11 @@ def fastest
   "foo".freeze =~ /boo/
 end
 
+def faster
+  "foo".freeze =~ /boo/
+  $~
+end
+
 def fast
   /boo/ === "foo".freeze  
 end
@@ -14,6 +19,7 @@ end
 
 Benchmark.ips do |x|
   x.report("String#=~") { fastest }
+  x.report("String#=~ w/ $~") { faster }
   x.report("Regexp#===") { fast }
   x.report("String#match") { slow }
   x.compare!
