@@ -952,11 +952,6 @@ Comparison:
 $ ruby -v code/string/===-vs-=~-vs-match.rb.rb
 ruby 2.3.1p112 (2016-04-26 revision 54768) [x64-mingw32]
 
-Warming up --------------------------------------
-           String#=~   221.224k i/100ms
-     String#=~ w/ $~   218.588k i/100ms
-          Regexp#===   213.191k i/100ms
-        String#match   194.297k i/100ms
 Calculating -------------------------------------
            String#=~      4.529M (± 0.5%) i/s -     22.786M in   5.031504s
      String#=~ w/ $~      4.440M (± 0.3%) i/s -     22.296M in   5.022139s
@@ -969,6 +964,32 @@ Comparison:
           Regexp#===:  4300482.4 i/s - 1.05x  slower
         String#match:  3589807.1 i/s - 1.26x  slower
 ```
+
+> That test, however, runs into problems when the test string and regular <br>
+> expressions are changed. Here is an additional benchmark with a rewritten <br>
+> test that behaves in a more predictable fashion. [code](code/string/match_operator_vs_method_and_===.rb) <br>
+> See code for logic in new test.
+
+```
+$ ruby -v code/string/match_operator_vs_method_and_===.rb
+ruby 2.3.1p112 (2016-04-26 revision 54768) [x64-mingw32]
+
+Comparison:
+    Match Threequals:     8585.0 i/s
+      Match Operator:     8328.0 i/s - 1.03x  slower
+  Nothing Threequals:     7056.2 i/s - 1.22x  slower
+    Nothing Operator:     6909.3 i/s - 1.24x  slower
+   Nothing Plus Data:     6778.7 i/s - 1.27x  slower
+      Nothing Method:     5238.0 i/s - 1.64x  slower
+     Match Plus Data:     2804.1 i/s - 3.06x  slower
+        Match Method:     2512.0 i/s - 3.42x  slower
+```
+
+> As is shown, the first test produces misleading results due to a lack of regexp matches found <br>
+> during the benchmark. `String#match` consistently underperforms `String#=~` under all tested <br>
+> conditions on my machine, which is presently running MRI. Additional changes for new test <br>
+> derived from [Issue #96](https://github.com/JuanitoFatas/fast-ruby/issues/96) in main repo.
+
 
 See [#59](https://github.com/JuanitoFatas/fast-ruby/pull/59) and [#62](https://github.com/JuanitoFatas/fast-ruby/pull/62) for discussions.
 
