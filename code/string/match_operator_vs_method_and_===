@@ -1,0 +1,33 @@
+require "benchmark/ips"
+
+logic = {
+  method:     "string".match(/regexp/),
+  operator:   "string" =~ /regexp/,
+  plus_data: ("string" =~ /regexp/; $~),
+  threequals: /regexp/ === "string"
+}; logic[:described]
+
+$match   = /(ab)/.freeze
+$nothing = /(ac)/.freeze
+$string  = "aaaaaaaaab".freeze
+
+$match_method       = "$string.match($match);  "
+$nothing_method     = "$string.match($nothing);"
+$match_operator     = "$string =~ $match;      "
+$nothing_operator   = "$string =~ $nothing;    "
+$match_plus_data    ="($string =~ $match;$~);  "
+$nothing_plus_data  ="($string =~ $nothing;$~);"
+$match_threequals   = "$match   === $string;   "
+$nothing_threequals = "$nothing === $string;   "
+
+Benchmark.ips do |x|
+  x.report(      "Match Method", $match_method       * 1000)
+  x.report(    "Nothing Method", $nothing_method     * 1000)
+  x.report(    "Match Operator", $match_operator     * 1000)
+  x.report(  "Nothing Operator", $nothing_operator   * 1000)
+  x.report(   "Match Plus Data", $match_plus_data    * 1000)
+  x.report( "Nothing Plus Data", $nothing_plus_data  * 1000)
+  x.report(  "Match Threequals", $match_threequals   * 1000)
+  x.report("Nothing Threequals", $nothing_threequals * 1000)
+  x.compare!
+end
