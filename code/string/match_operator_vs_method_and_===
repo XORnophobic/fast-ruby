@@ -7,18 +7,18 @@ logic = {
   threequals: /regexp/ === "string"
 }; logic[:described]
 
-$match   = /(ab)/.freeze
-$nothing = /(ac)/.freeze
-$string  = "aaaaaaaaab".freeze
+$match   = "/(ab)/".freeze
+$nothing = "/(ac)/".freeze
+$string  = "\"aaaaaaaaab\"".freeze
 
-$match_method       = "$string.match($match);  "
-$nothing_method     = "$string.match($nothing);"
-$match_operator     = "$string =~ $match;      "
-$nothing_operator   = "$string =~ $nothing;    "
-$match_plus_data    ="($string =~ $match;$~);  "
-$nothing_plus_data  ="($string =~ $nothing;$~);"
-$match_threequals   = "$match   === $string;   "
-$nothing_threequals = "$nothing === $string;   "
+$match_method       = "#{$string}.match(#{$match});  "
+$nothing_method     = "#{$string}.match(#{$nothing});"
+$match_operator     = "#{$string} =~ #{$match};      "
+$nothing_operator   = "#{$string} =~ #{$nothing};    "
+$match_plus_data    ="(#{$string} =~ #{$match};$~);  "
+$nothing_plus_data  ="(#{$string} =~ #{$nothing};$~);"
+$match_threequals   = "#{$match}   === #{$string};   "
+$nothing_threequals = "#{$nothing} === #{$string};   "
 
 Benchmark.ips do |x|
   x.report(      "Match Method", $match_method       * 1000)
