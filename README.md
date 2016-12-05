@@ -949,7 +949,7 @@ Comparison:
 > altering existing code unless you need access to match data.
 
 ```
-$ ruby -v code/string/===-vs-=~-vs-match.rb.rb
+$ ruby -v code/string/===-vs-=~-vs-match.rb
 ruby 2.3.1p112 (2016-04-26 revision 54768) [x64-mingw32]
 
 Calculating -------------------------------------
