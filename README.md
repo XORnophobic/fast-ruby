@@ -971,28 +971,28 @@ Comparison:
 > See code for logic in new test.
 
 ```
-$ ruby -v code/string/match_operator_vs_method_and_===.rb
+$ ruby -v -W0 code/string/match_operator_vs_method_and_===.rb
 ruby 2.3.1p112 (2016-04-26 revision 54768) [x64-mingw32]
 
 Calculating -------------------------------------
-        Match Method      2.512k (± 0.6%) i/s -     12.750k in   5.075839s
-      Nothing Method      5.238k (± 0.3%) i/s -     26.418k in   5.043598s
-      Match Operator      8.328k (± 0.5%) i/s -     42.177k in   5.064590s
-    Nothing Operator      6.909k (± 0.4%) i/s -     34.600k in   5.007800s
-     Match Plus Data      2.804k (± 0.6%) i/s -     14.100k in   5.028538s
-   Nothing Plus Data      6.779k (± 0.3%) i/s -     34.068k in   5.025774s
-    Match Threequals      8.585k (± 0.3%) i/s -     43.350k in   5.049509s
-  Nothing Threequals      7.056k (± 0.4%) i/s -     35.955k in   5.095588s
+        Match Method      2.180k (± 0.7%) i/s -     11.000k in   5.046808s
+      Nothing Method      4.780k (± 0.4%) i/s -     24.174k in   5.056899s
+      Match Operator      6.030k (± 0.4%) i/s -     30.400k in   5.041399s
+    Nothing Operator      6.574k (± 0.5%) i/s -     33.354k in   5.074027s
+     Match Plus Data      2.491k (± 0.7%) i/s -     12.550k in   5.039066s
+   Nothing Plus Data      6.281k (± 0.8%) i/s -     31.824k in   5.067282s
+    Match Threequals      5.603k (± 0.4%) i/s -     28.350k in   5.059484s
+  Nothing Threequals      6.086k (± 0.3%) i/s -     31.008k in   5.095438s
 
 Comparison:
-    Match Threequals:     8585.0 i/s
-      Match Operator:     8328.0 i/s - 1.03x  slower
-  Nothing Threequals:     7056.2 i/s - 1.22x  slower
-    Nothing Operator:     6909.3 i/s - 1.24x  slower
-   Nothing Plus Data:     6778.7 i/s - 1.27x  slower
-      Nothing Method:     5238.0 i/s - 1.64x  slower
-     Match Plus Data:     2804.1 i/s - 3.06x  slower
-        Match Method:     2512.0 i/s - 3.42x  slower
+    Nothing Operator:     6573.7 i/s
+   Nothing Plus Data:     6280.7 i/s - 1.05x  slower
+  Nothing Threequals:     6085.5 i/s - 1.08x  slower
+      Match Operator:     6030.2 i/s - 1.09x  slower
+    Match Threequals:     5603.4 i/s - 1.17x  slower
+      Nothing Method:     4780.5 i/s - 1.38x  slower
+     Match Plus Data:     2490.7 i/s - 2.64x  slower
+        Match Method:     2179.7 i/s - 3.02x  slower
 ```
 
 > As is shown, the first test produces misleading results due to a lack of regexp matches found <br>
